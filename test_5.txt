@@ -1,0 +1,38 @@
+[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+ [1,1,1,1,1,9,9,9,9,9,9,1,1,1,1],
+ [1,1,1,9,9,1,1,8,8,8,1,9,1,1,1], 7,7,7              7*3
+ [1,1,1,9,1,1,1,1,1,1,1,1,9,1,1], 7,7,7,7,7,7,7,7    7*8
+ [1,1,9,1,1,1,1,1,1,1,1,1,9,1,1], 7,7,7,7,7,7,7,7,7  7*9
+ [1,1,9,5,1,1,5,5,5,1,1,1,9,1,1], 3,7,7,3,3,3,7,7,7  7*5,3*4  7*50,3*9
+ [1,1,9,1,5,5,1,1,1,5,5,5,9,1,1], 7,3,3,7,7,7,3,3,3  7*4,3*5
+ [1,1,9,1,1,1,1,1,1,1,1,1,9,1,1], 7,7,7,7,7,7,7,7,7  7*9
+ [1,1,1,9,1,1,1,1,1,1,1,9,1,1,1], 7,7,7,7,7,7,7      7*7
+ [1,1,1,1,9,1,1,1,1,1,9,1,1,1,1], 7,7,7,7,7          7*5
+ [1,1,1,1,1,9,9,8,9,9,1,1,1,1,1],
+ [1,1,1,1,1,1,1,1,1,1,1,1,9,9,1],
+ [1,9,1,1,1,1,1,1,1,1,1,9,2,2,9], 5,5
+ [9,1,9,1,1,1,1,1,1,1,1,9,2,2,9], 8,5,5                       8,5*4
+ [1,9,1,1,1,1,1,1,1,1,1,1,9,7,1]]
+
+This goes to show that one of the very last cells you look at can change your
+perception of the entire lake you were just building up. The 8 in the bottom
+center changes the whole rest of the lake to ignore the 8s and 9s. But,
+according to my algorithm so far, it'll have likely been building the 8s into
+the lake. So we need some sort of reconcilliation step afterward to remove the
+cells from the lake that should no longer be there. What are the stopping
+conditions for the lake building? Either you run into the ocean, or you find a
+high spot that  descends again? For instance, that 8 is next to a 8 on the other
+side that isn't part of the lake? But how does the algorithm "know" that?
+
+In this example, we have some 8s that are part of the lake. Then we get to an 8
+where a neighbor drops back to a 1. But that itself can't be the whole story...
+Because that same thing happens when we drop from 5 to 1. And it's still part of
+the lake. Wow, oh wow. WTF!
+
+Or shit, a more complicated example would be if that 8 down there had actually
+been a 4. That would then have bifurcated the one lake into two.
+
+Then maybe the safest bet would be building up mini "lakes" that are all the
+same depth? But that doesn't even quite work easily here because the 5s aren't
+all the way across. The "ridge" jumps diagonally across rows. Wow...
+

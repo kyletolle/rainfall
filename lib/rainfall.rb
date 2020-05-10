@@ -60,7 +60,12 @@ def western(topo, coord)
 end
 
 def all_neighbors(topo, coord)
-  [northern(topo, coord), southern(topo, coord), eastern(topo, coord), western(topo, coord)]
+  [
+    northern(topo, coord),
+    southern(topo, coord),
+    eastern(topo, coord),
+    western(topo, coord)
+  ]
 end
 
 def new_lake(cell)
@@ -72,18 +77,19 @@ def new_lake(cell)
   }
 end
 
+def shortest_neighbor(neighbors)
+end
+
 def build_lake(topo, lake, cell)
   coord = cell[:coord]
   already_visited_this_cell = topo.coords_visited.include?(coord)
   return if already_visited_this_cell
-
-  puts "    maybe lake: #{coord}"
+  # puts "    maybe lake: #{coord}"
 
   topo.coords_visited << coord
 
   return if cell[:elevation] >= lake[:height]
-  puts "      shorter than lake height"
-
+  # puts "      shorter than lake height"
 
   neighbors = all_neighbors(topo, coord)
   north, south, east, west = neighbors
@@ -116,7 +122,6 @@ def build_lake(topo, lake, cell)
     lake[:drains_to_ocean] = true
     return
   end
-
 end
 
 def rainFall(terrain)
@@ -174,7 +179,7 @@ def rainFall(terrain)
 
     lake[:cells].map do |cell|
       puts "  Lake cell: #{cell}"
-      puts "    lake height minus cell elevation: #{lake[:height] - cell[:elevation]}"
+      # puts "    lake height minus cell elevation: #{lake[:height] - cell[:elevation]}"
       lake[:height] - cell[:elevation]
     end
     .sum
